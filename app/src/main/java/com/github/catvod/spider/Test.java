@@ -130,32 +130,52 @@ public class Test extends Spider {
             // 固定详情数据（根据id返回不同测试数据）
             String vodId = ids.get(0);
             JSONObject vodInfo = new JSONObject();
-            if ("test_001".equals(vodId)) {
-                vodInfo.put("vod_id", "test_001")
-                        .put("vod_name", "测试电影-流浪地球2")
-                        .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-                        .put("type_name", "科幻/动作")
-                        .put("vod_year", "2023")
-                        .put("vod_area", "大陆")
-                        .put("vod_remarks", "高清")
-                        .put("vod_actor", "吴京,刘德华")
-                        .put("vod_director", "郭帆")
-                        .put("vod_content", "《流浪地球2》是《流浪地球》的前传，讲述了太阳即将毁灭，人类开启“流浪地球计划”，带着地球逃离太阳系的故事。")
-                        // 播放源（影视仓核心字段）
-                        .put("vod_play_from", "xg_app_player$$$ckm3u8")
-                        .put("vod_play_url", "第1集$test_play_001#第2集$test_play_002$$$第1集$test_play_001#第2集$test_play_002");
-            } else {
-                vodInfo.put("vod_id", vodId)
-                        .put("vod_name", "默认测试视频")
-                        .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-                        .put("type_name", "测试分类")
-                        .put("vod_year", "2024")
-                        .put("vod_area", "大陆")
-                        .put("vod_remarks", "测试")
-                        .put("vod_content", "这是一个测试视频的详情内容");
-            }
+//            if ("test_001".equals(vodId)) {
+//                vodInfo.put("vod_id", "test_001")
+//                        .put("vod_name", "测试电影-流浪地球2")
+//                        .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
+//                        .put("type_name", "科幻/动作")
+//                        .put("vod_year", "2023")
+//                        .put("vod_area", "大陆")
+//                        .put("vod_remarks", "高清")
+//                        .put("vod_actor", "吴京,刘德华")
+//                        .put("vod_director", "郭帆")
+//                        .put("vod_content", "《流浪地球2》是《流浪地球》的前传，讲述了太阳即将毁灭，人类开启“流浪地球计划”，带着地球逃离太阳系的故事。")
+//                        // 播放源（影视仓核心字段）
+//                        .put("vod_play_from", "xg_app_player$$$ckm3u8")
+//                        .put("vod_play_url", "第1集$test_play_001#第2集$test_play_002$$$第1集$test_play_001#第2集$test_play_002");
+//            } else {
+//                vodInfo.put("vod_id", vodId)
+//                        .put("vod_name", "测试电影-流浪地球2" + vodId)
+//                        .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
+//                        .put("type_name", "科幻/动作")
+//                        .put("vod_year", "2023")
+//                        .put("vod_area", "大陆")
+//                        .put("vod_remarks", "高清")
+//                        .put("vod_actor", "吴京,刘德华," + vodId)
+//                        .put("vod_director", "郭帆," + vodId)
+//                        .put("vod_content", "《流浪地球2》是《流浪地球》的前传，讲述了太阳即将毁灭，人类开启“流浪地球计划”，带着地球逃离太阳系的故事。" + vodId)
+//                        // 播放源（影视仓核心字段）
+//                        .put("vod_play_from", "xg_app_player$$$ckm3u8")
+//                        .put("vod_play_url", "第1集$https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240095359203.mp4#第2集$https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240095359203.mp4$$$第1集$test_play_001#第2集$test_play_002");
+//            }
+            vodInfo.put("vod_id", vodId)
+                    .put("vod_name", vodId + "测试电影-流浪地球2")
+                    .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
+                    .put("type_name", "科幻/动作")
+                    .put("vod_year", "2023")
+                    .put("vod_area", "大陆")
+                    .put("vod_remarks", "高清")
+                    .put("vod_actor", "吴京,刘德华")
+                    .put("vod_director", "郭帆")
+                    .put("vod_content", "《流浪地球2》是《流浪地球》的前传，讲述了太阳即将毁灭，人类开启“流浪地球计划”，带着地球逃离太阳系的故事。")
+                    // 播放源（影视仓核心字段）
+                    .put("vod_play_from", "线路一")
+                    .put("vod_play_url", "第1集$https://cloud.video.taobao.com/play/u/57349687/p/1/e/6/t/1/240095359203.mp4");
             list.put(vodInfo);
-            result.put("list", list);
+            result.put("code", 200)
+                    .put("msg", "success")
+                    .put("list", list);
 
             return result.toString();
         } catch (JSONException e) {
@@ -172,10 +192,14 @@ public class Test extends Spider {
         try {
             JSONObject result = new JSONObject();
             // 固定播放地址（测试用的有效m3u8地址，可直接播放）
-            result.put("parse", 0) // 0=不解析，直接播放；1=需要解析
-                    .put("playUrl", "https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240095359203.mp4")
+            result.put("code", 200) // 新增：前端常用的成功状态码
+                    .put("msg", "success") // 新增：提示信息
+                    .put("parse", 0) // 0=不解析，直接播放；1=需要解析
+                    .put("playUrl", "")
                     .put("url", "https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240095359203.mp4")
-                    .put("header", "");
+                    .put("header", "")
+                    .put("flag", flag)
+                    .put("videoId", id);
             return result.toString();
         } catch (JSONException e) {
             SpiderDebug.log(TAG + "播放数据构建失败：" + e.getMessage());
