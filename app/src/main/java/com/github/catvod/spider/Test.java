@@ -173,8 +173,8 @@ public class Test extends Spider {
             JSONObject result = new JSONObject();
             // 固定播放地址（测试用的有效m3u8地址，可直接播放）
             result.put("parse", 0) // 0=不解析，直接播放；1=需要解析
-                    .put("playUrl", "")
-                    .put("url", "https://gzp007.github.io/TVBox/test.mp4")
+                    .put("playUrl", "https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240095359203.mp4")
+                    .put("url", "https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240095359203.mp4")
                     .put("header", "");
             return result.toString();
         } catch (JSONException e) {
