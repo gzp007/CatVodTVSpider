@@ -81,15 +81,13 @@ public class Test extends Spider {
                 result.put("filters", filterConfig);
             }
 
-            //String liveTxt = OkHttpUtil.string(siteUrl, getHeaders(siteUrl));
-
             // 固定首页视频列表
             JSONArray videos = new JSONArray();
             videos.put(new JSONObject()
-                    .put("vod_id", "homeContent-vod_id")
-                    .put("vod_name", "vod_name")
-                    .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-                    .put("vod_remarks", "homeContent-vod_remarks"));
+                    .put("vod_id", "HC-vod_id")
+                    .put("vod_name", "HC-vod_name")
+                    .put("vod_pic", "")
+                    .put("vod_remarks", "HC-vod_remarks"));
             result.put("list", videos);
 
             return result.toString();
@@ -114,25 +112,12 @@ public class Test extends Spider {
 
             // 固定分类视频列表
             JSONArray videos = new JSONArray();
-//            if ("dianying".equals(tid)) {
-//                videos.put(new JSONObject()
-//                        .put("vod_id", "vod_id")
-//                        .put("vod_name", "分类测试-动作电影-战狼2")
-//                        .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-//                        .put("vod_remarks", "2017"));
-//            } else if ("lianxuju".equals(tid)) {
-//                videos.put(new JSONObject()
-//                        .put("vod_id", "vod_id")
-//                        .put("vod_name", "分类测试-国产剧-庆余年")
-//                        .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-//                        .put("vod_remarks", "第一季"));
-//            }
             //tid 代表 class中的type_id
             videos.put(new JSONObject()
-                    .put("vod_id", "categoryContent-vod_id-tid" + tid)
-                    .put("vod_name", "categoryContent-vod_name-tid" + tid)
-                    .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-                    .put("vod_remarks", "categoryContent-vod_remarks-tid" + tid));
+                    .put("vod_id", "CC-vod_id-tid" + tid)
+                    .put("vod_name", "CC-vod_name-tid" + tid)
+                    .put("vod_pic", "")
+                    .put("vod_remarks", "CC-vod_remarks-tid" + tid));
             result.put("list", videos);
 
             return result.toString();
@@ -155,15 +140,15 @@ public class Test extends Spider {
             String vodId = ids.get(0);
             JSONObject vodInfo = new JSONObject();
             vodInfo.put("vod_id", vodId)
-                    .put("vod_name", "detailContent-vod_name-ids" + ids)
-                    .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-                    .put("type_name", "detailContent-type_name")
-                    .put("vod_year", "detailContent-vod_year")
-                    .put("vod_area", "detailContent-vod_area")
-                    .put("vod_remarks", "detailContent-vod_remarks")
-                    .put("vod_actor", "detailContent-vod_actor")
-                    .put("vod_director", "detailContent-vod_director")
-                    .put("vod_content", "detailContent-vod_content")
+                    .put("vod_name", "DC-vod_name-ids" + ids)
+                    .put("vod_pic", "")
+                    .put("type_name", "DC-type_name")
+                    .put("vod_year", "DC-vod_year")
+                    .put("vod_area", "DC-vod_area")
+                    .put("vod_remarks", "DC-vod_remarks")
+                    .put("vod_actor", "DC-vod_actor")
+                    .put("vod_director", "DC-vod_director")
+                    .put("vod_content", "DC-vod_content")
                     // 播放源（影视仓核心字段）
                     .put("vod_play_from", "线路一$$$线路二")
                     .put("vod_play_url", "第1集$https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240095359203.mp4#第2集$https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240368550193.mp4$$$第1集$https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240167997205.mp4#第2集$https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240167997205.mp4");
@@ -212,12 +197,14 @@ public class Test extends Spider {
         try {
             JSONObject result = new JSONObject();
             JSONArray videos = new JSONArray();
-            // 固定搜索结果
-            videos.put(new JSONObject()
-                    .put("vod_id", "SC-vod_id")
-                    .put("vod_name", key)
-                    .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-                    .put("vod_remarks", "SC-vod_remarks"));
+            if ("SC-vod_id".equals(key)) {
+                // 固定搜索结果
+                videos.put(new JSONObject()
+                        .put("vod_id", "SC-vod_id")
+                        .put("vod_name", "SC-vod_name")
+                        .put("vod_pic", "")
+                        .put("vod_remarks", "SC-vod_remarks"));
+            }
             result.put("list", videos);
             return result.toString();
         } catch (JSONException e) {
