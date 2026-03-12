@@ -63,15 +63,10 @@ public class Test extends Spider {
             // 固定首页视频列表
             JSONArray videos = new JSONArray();
             videos.put(new JSONObject()
-                    .put("vod_id", "test_001")
-                    .put("vod_name", "测试电影-流浪地球2")
+                    .put("vod_id", "homeContent-vod_id")
+                    .put("vod_name", "homeContent-vod_name")
                     .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-                    .put("vod_remarks", "2023"));
-            videos.put(new JSONObject()
-                    .put("vod_id", "test_002")
-                    .put("vod_name", "测试电视剧-狂飙")
-                    .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-                    .put("vod_remarks", "完结"));
+                    .put("vod_remarks", "homeContent-vod_remarks"));
             result.put("list", videos);
 
             return result.toString();
@@ -96,19 +91,25 @@ public class Test extends Spider {
 
             // 固定分类视频列表
             JSONArray videos = new JSONArray();
-            if ("dianying".equals(tid)) {
-                videos.put(new JSONObject()
-                        .put("vod_id", "movie_001")
-                        .put("vod_name", "分类测试-动作电影-战狼2")
-                        .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-                        .put("vod_remarks", "2017"));
-            } else if ("lianxuju".equals(tid)) {
-                videos.put(new JSONObject()
-                        .put("vod_id", "tv_001")
-                        .put("vod_name", "分类测试-国产剧-庆余年")
-                        .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-                        .put("vod_remarks", "第一季"));
-            }
+//            if ("dianying".equals(tid)) {
+//                videos.put(new JSONObject()
+//                        .put("vod_id", "vod_id")
+//                        .put("vod_name", "分类测试-动作电影-战狼2")
+//                        .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
+//                        .put("vod_remarks", "2017"));
+//            } else if ("lianxuju".equals(tid)) {
+//                videos.put(new JSONObject()
+//                        .put("vod_id", "vod_id")
+//                        .put("vod_name", "分类测试-国产剧-庆余年")
+//                        .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
+//                        .put("vod_remarks", "第一季"));
+//            }
+            //tid 代表 class中的type_id
+            videos.put(new JSONObject()
+                    .put("vod_id", "categoryContent-vod_id-tid" + tid)
+                    .put("vod_name", "categoryContent-vod_name-tid" + tid)
+                    .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
+                    .put("vod_remarks", "categoryContent-vod_remarks-tid" + tid));
             result.put("list", videos);
 
             return result.toString();
@@ -130,48 +131,20 @@ public class Test extends Spider {
             // 固定详情数据（根据id返回不同测试数据）
             String vodId = ids.get(0);
             JSONObject vodInfo = new JSONObject();
-//            if ("test_001".equals(vodId)) {
-//                vodInfo.put("vod_id", "test_001")
-//                        .put("vod_name", "测试电影-流浪地球2")
-//                        .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-//                        .put("type_name", "科幻/动作")
-//                        .put("vod_year", "2023")
-//                        .put("vod_area", "大陆")
-//                        .put("vod_remarks", "高清")
-//                        .put("vod_actor", "吴京,刘德华")
-//                        .put("vod_director", "郭帆")
-//                        .put("vod_content", "《流浪地球2》是《流浪地球》的前传，讲述了太阳即将毁灭，人类开启“流浪地球计划”，带着地球逃离太阳系的故事。")
-//                        // 播放源（影视仓核心字段）
-//                        .put("vod_play_from", "xg_app_player$$$ckm3u8")
-//                        .put("vod_play_url", "第1集$test_play_001#第2集$test_play_002$$$第1集$test_play_001#第2集$test_play_002");
-//            } else {
-//                vodInfo.put("vod_id", vodId)
-//                        .put("vod_name", "测试电影-流浪地球2" + vodId)
-//                        .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-//                        .put("type_name", "科幻/动作")
-//                        .put("vod_year", "2023")
-//                        .put("vod_area", "大陆")
-//                        .put("vod_remarks", "高清")
-//                        .put("vod_actor", "吴京,刘德华," + vodId)
-//                        .put("vod_director", "郭帆," + vodId)
-//                        .put("vod_content", "《流浪地球2》是《流浪地球》的前传，讲述了太阳即将毁灭，人类开启“流浪地球计划”，带着地球逃离太阳系的故事。" + vodId)
-//                        // 播放源（影视仓核心字段）
-//                        .put("vod_play_from", "xg_app_player$$$ckm3u8")
-//                        .put("vod_play_url", "第1集$https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240095359203.mp4#第2集$https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240095359203.mp4$$$第1集$test_play_001#第2集$test_play_002");
-//            }
             vodInfo.put("vod_id", vodId)
-                    .put("vod_name", vodId + "测试电影-流浪地球2")
+                    .put("vod_name", "detailContent-vod_name-ids" + ids)
                     .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-                    .put("type_name", "科幻/动作")
-                    .put("vod_year", "2023")
-                    .put("vod_area", "大陆")
-                    .put("vod_remarks", "高清")
-                    .put("vod_actor", "吴京,刘德华")
-                    .put("vod_director", "郭帆")
-                    .put("vod_content", "《流浪地球2》是《流浪地球》的前传，讲述了太阳即将毁灭，人类开启“流浪地球计划”，带着地球逃离太阳系的故事。")
+                    .put("type_name", "detailContent-type_name")
+                    .put("vod_year", "detailContent-vod_year")
+                    .put("vod_area", "detailContent-vod_area")
+                    .put("vod_remarks", "detailContent-vod_remarks")
+                    .put("vod_actor", "detailContent-vod_actor")
+                    .put("vod_director", "detailContent-vod_director")
+                    .put("vod_content", "detailContent-vod_content")
                     // 播放源（影视仓核心字段）
-                    .put("vod_play_from", "线路一")
-                    .put("vod_play_url", "第1集$https://cloud.video.taobao.com/play/u/57349687/p/1/e/6/t/1/240095359203.mp4");
+                    .put("vod_play_from", "线路一$$$线路二")
+                    .put("vod_play_url", "第1集$https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240095359203.mp4#第2集$https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240368550193.mp4$$$第1集$https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240167997205.mp4#第2集$https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240167997205.mp4");
+
             list.put(vodInfo);
             result.put("code", 200)
                     .put("msg", "success")
@@ -195,11 +168,12 @@ public class Test extends Spider {
             result.put("code", 200) // 新增：前端常用的成功状态码
                     .put("msg", "success") // 新增：提示信息
                     .put("parse", 0) // 0=不解析，直接播放；1=需要解析
-                    .put("playUrl", "")
-                    .put("url", "https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240095359203.mp4")
-                    .put("header", "")
+                    .put("playUrl", "")//有值的话会报”播放错误“
+                    .put("url", id)//无值的话会报”播放错误“ 最终要播放的URL https://cloud.video.taobao.com//play/u/57349687/p/1/e/6/t/1/240167997205.mp4
+                    .put("header", "")//可为空
                     .put("flag", flag)
                     .put("videoId", id);
+
             return result.toString();
         } catch (JSONException e) {
             SpiderDebug.log(TAG + "播放数据构建失败：" + e.getMessage());
@@ -217,10 +191,10 @@ public class Test extends Spider {
             JSONArray videos = new JSONArray();
             // 固定搜索结果
             videos.put(new JSONObject()
-                    .put("vod_id", "search_001")
-                    .put("vod_name", "搜索结果-" + key)
+                    .put("vod_id", "searchContent-vod_id")
+                    .put("vod_name", "searchContent-vod_name-key" + key)
                     .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-                    .put("vod_remarks", "搜索测试"));
+                    .put("vod_remarks", "searchContent-vod_remarks"));
             result.put("list", videos);
             return result.toString();
         } catch (JSONException e) {
