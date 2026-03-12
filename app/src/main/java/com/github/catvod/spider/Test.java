@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.github.catvod.crawler.Spider;
 import com.github.catvod.crawler.SpiderDebug;
 
+import com.github.catvod.utils.okhttp.OkHttpUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,6 +21,8 @@ import java.util.Map;
  * 所有接口返回固定数据，无需依赖外部网站，仅用于测试接口调用和显示
  */
 public class Test extends Spider {
+    private static final String siteUrl = "clan://localhost/TVBox/live.txt";
+    private static final String siteHost = "localhost/TVBox";
     private static final String TAG = "TestSpider";
 
     // 固定播放源配置（影视仓显示用）
@@ -42,6 +45,24 @@ public class Test extends Spider {
     }
 
     /**
+     * 爬虫headers
+     *
+     * @param url
+     * @return
+     */
+    protected HashMap<String, String> getHeaders(String url) {
+        HashMap<String, String> headers = new HashMap<>();
+        headers.put("method", "GET");
+        headers.put("Host", siteHost);
+        headers.put("Upgrade-Insecure-Requests", "1");
+        headers.put("DNT", "1");
+        headers.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36");
+        headers.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+        headers.put("Accept-Language", "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2");
+        return headers;
+    }
+
+    /**
      * 首页内容 - 写死固定数据
      */
     @Override
@@ -60,11 +81,13 @@ public class Test extends Spider {
                 result.put("filters", filterConfig);
             }
 
+            //String liveTxt = OkHttpUtil.string(siteUrl, getHeaders(siteUrl));
+
             // 固定首页视频列表
             JSONArray videos = new JSONArray();
             videos.put(new JSONObject()
                     .put("vod_id", "homeContent-vod_id")
-                    .put("vod_name", "homeContent-vod_name")
+                    .put("vod_name", "vod_name")
                     .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
                     .put("vod_remarks", "homeContent-vod_remarks"));
             result.put("list", videos);
@@ -191,10 +214,10 @@ public class Test extends Spider {
             JSONArray videos = new JSONArray();
             // 固定搜索结果
             videos.put(new JSONObject()
-                    .put("vod_id", "searchContent-vod_id")
-                    .put("vod_name", "searchContent-vod_name-key" + key)
+                    .put("vod_id", "SC-vod_id")
+                    .put("vod_name", key)
                     .put("vod_pic", "https://gzp007.github.io/TVBox/test.png")
-                    .put("vod_remarks", "searchContent-vod_remarks"));
+                    .put("vod_remarks", "SC-vod_remarks"));
             result.put("list", videos);
             return result.toString();
         } catch (JSONException e) {
